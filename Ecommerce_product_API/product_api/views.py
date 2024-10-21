@@ -4,13 +4,16 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Product, Category
 from .serializer import ProductSerializer, CategorySerializer
 from .filters import ProductFilter
+#from django.contrib.auth.decorators import login_required
 
+#@login_required
 class CategoryViewSet(viewsets.ModelViewSet):   #the viewset enables to perform full CRUD functionality
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+#@login_required
 class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Category.objects.all()

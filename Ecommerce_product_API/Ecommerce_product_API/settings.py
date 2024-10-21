@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'product_api',
     'users',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
 ]
 
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'Ecommerce_product_API.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

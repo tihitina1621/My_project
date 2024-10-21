@@ -5,20 +5,26 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'   #simplify complex data structure
+
+    def validate_name(self, value):
+        if len(value) <= 2:
+            raise serializers.ValidationError("Category name must be greater than 1 character.")
+        return value
+   
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'name', 'description','price','stock_quantity','image_url', 'created_at', 'category']
-    def validate(self, data):
-        if len(data['name']) < 2:
-            raise serializers.ValidationError("Name must be at least 5 characters long.")
-        return data
-    def validate(self, data):
-        if data['price'] <= 0.0:
+    def validate_name(self, value):
+        if len(value) <= 2:
+            raise serializers.ValidationError("Category name must be greater than 1 character.")
+        return value
+    def validate_price(self, data):
+        if data <= 0.0:
             raise serializers.ValidationError("Price must be greater than 0.")
         return data
-    def validate(self, data):
-        if data['stock_quantity'] <= 0:
+    def validate_stock_quantity(self, data):
+        if data <= 0:
             raise serializers.ValidationError("We are out of stock.")
         return data
     
