@@ -10,7 +10,9 @@ class CategorySerializer(serializers.ModelSerializer):
         if len(value) <= 2:
             raise serializers.ValidationError("Category name must be greater than 1 character.")
         return value
-   
+    def create(self, validated_data):
+        return Product.objects.create(**validated_data)
+        
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -27,4 +29,5 @@ class ProductSerializer(serializers.ModelSerializer):
         if data <= 0:
             raise serializers.ValidationError("We are out of stock.")
         return data
-    
+    def create(self, validated_data):
+        return Product.objects.create(**validated_data)

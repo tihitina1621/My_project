@@ -17,7 +17,7 @@ class SignUpView(View):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('product_list')
+            return redirect('product-list')
         return render(request, 'registration/signup.html', {'form': form})
 
 class LoginView(View):
@@ -31,5 +31,5 @@ class LoginView(View):
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
-                return redirect('product_list')
+                return redirect('product-list')
         return render(request, 'registration/login.html', {'form': form})
